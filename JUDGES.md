@@ -14,7 +14,7 @@ TrustRAG's core bet: **authorization has to happen in application code, before c
 
 ## What it does
 
-Three roles (Employee / Manager / Admin), seven synthetic documents across public/restricted/confidential tiers, and a real login screen (not a dropdown) gate every request:
+Three roles (Employee / Manager / Admin), a pinned 54-page GitLab Handbook snapshot across internal/restricted/confidential tiers, and a real login screen (not a dropdown) gate every request:
 
 - Ask a question → the app resolves which documents you're authorized for (role, direct grant, or active delegation) → retrieves only within that set → **re-checks every single returned chunk against your permissions a second time** → only then builds the Gemma 4 prompt.
 - A manager can temporarily delegate access to one specific document to an employee, for a set expiry — enforced server-side on every request, not just hidden in the UI.
@@ -33,7 +33,7 @@ Alice (employee) asks for the CEO's salary
   → Gemma correctly says it has no supporting evidence
 ```
 
-This is backed by a 46-test pytest suite that runs fully offline (no API key needed) and specifically includes a test that simulates an indexing/filtering bug — forcing an unauthorized chunk into the retrieval results — and proves the second ACL check still strips it out before it would reach the model. `pytest -q` → 46/46 passing.
+This is backed by a 55-test pytest suite that runs fully offline (no API key needed) and specifically includes a test that simulates an indexing/filtering bug — forcing an unauthorized chunk into the retrieval results — and proves the second ACL check still strips it out before it would reach the model. `pytest -q` → 55/55 passing.
 
 ## How Gemma 4 is used
 
@@ -68,4 +68,4 @@ This is backed by a 46-test pytest suite that runs fully offline (no API key nee
 
 ## Tech stack
 
-Python · Streamlit · ChromaDB · Gemma 4 via the Gemini API (`google-genai`) · SHA-256 hash chain · pytest (46 tests) · deployable to Railway (`Procfile`, `railway.json` included).
+Python · Streamlit · ChromaDB · Gemma 4 via the Gemini API (`google-genai`) · SHA-256 hash chain · pytest (55 tests), real semantic retrieval (all-MiniLM-L6-v2), BIPIA-benchmarked injection scanner · deployable to Railway (`Procfile`, `railway.json` included).

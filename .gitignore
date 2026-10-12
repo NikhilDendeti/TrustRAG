@@ -9,3 +9,5 @@ data/delegations.json.tmp
 venv/
 frontend/node_modules/
 frontend/dist/
+data/bipia/
+.claude/

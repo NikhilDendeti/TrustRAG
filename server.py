@@ -44,6 +44,7 @@ from ingestion.loader import (
 from rag.answerer import answer_question
 from rag.indexer import ChromaIndex
 from rag.retriever import retrieve_authorized_chunks
+from security.context_guard import guard_retrieved_chunks
 from security.prompt_scanner import policy_decision, scan_prompt
 
 SETTINGS = load_settings()
@@ -64,10 +65,9 @@ users = load_users(SETTINGS.demo_users_path)
 user_by_id: dict[str, User] = {u.user_id: u for u in users}
 
 corpus = load_documents(SETTINGS.acl_path, SETTINGS.documents_dir)
-index = ChromaIndex(persist_dir=SETTINGS.chroma_persist_dir)
-index.reset()
+index = ChromaIndex(persist_dir=SETTINGS.chroma_persist_dir, embedding_model=SETTINGS.embedding_model)
 _texts = {d.document_id: load_document_text(SETTINGS.documents_dir, d) for d in corpus.documents}
-index.index_documents(corpus.documents, _texts)
+index.ensure_indexed(corpus.documents, _texts)
 
 delegations = load_delegations(SETTINGS.delegations_path)
 
@@ -126,6 +126,9 @@ def me(user: User = Depends(get_current_user)):
         **_user_payload(user),
         "accessible_count": len(accessible),
         "total_count": len(corpus.documents),
+        "embedding_name": index.embedding_name,
+        "embedding_fallback_reason": index.embedding_fallback_reason,
+        "indexed_chunk_count": index.count(),
     }
 
 
@@ -210,15 +213,30 @@ def ask(req: AskRequest, user: User = Depends(get_current_user)):
             {"count": len(result.rejected_unauthorized_chunk_ids)},
         )
 
-    if not result.chunks:
+    # Indirect prompt injection guard: among the authorized chunks, withhold
+    # any whose own text tries to give the assistant orders, so that text
+    # never reaches the model.
+    guard = guard_retrieved_chunks(result.chunks)
+    if guard.quarantined:
+        audit_log.append(
+            "document_injection_quarantined",
+            user.user_id,
+            {
+                "chunk_ids": [q.chunk.chunk_id for q in guard.quarantined],
+                "rule_ids": sorted({f.rule_id for q in guard.quarantined for f in q.findings}),
+            },
+        )
+    safe_chunks = guard.clean_chunks
+
+    if not safe_chunks:
         audit_log.append("retrieval_completed", user.user_id, {"outcome": "abstained"})
     else:
         audit_log.append(
             "retrieval_completed", user.user_id,
-            {"outcome": "answered", "chunk_count": len(result.chunks), "thinking_level": thinking_level},
+            {"outcome": "answered", "chunk_count": len(safe_chunks), "thinking_level": thinking_level},
         )
 
-    answer = answer_question(SETTINGS, question, result.chunks, thinking_level=thinking_level)
+    answer = answer_question(SETTINGS, question, safe_chunks, thinking_level=thinking_level)
 
     return {
         "blocked": False,
@@ -237,7 +255,14 @@ def ask(req: AskRequest, user: User = Depends(get_current_user)):
                 "classification": c.classification,
                 "text": c.text,
             }
-            for c in result.chunks
+            for c in safe_chunks
+        ],
+        "quarantined": [
+            {
+                "title": q.chunk.title,
+                "rule_ids": [f.rule_id for f in q.findings],
+            }
+            for q in guard.quarantined
         ],
     }
 

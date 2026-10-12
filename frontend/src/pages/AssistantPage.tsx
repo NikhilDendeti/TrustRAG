@@ -113,6 +113,16 @@ export function AssistantPage() {
             </Banner>
           )}
 
+          {!result.blocked &&
+            result.quarantined.map((q, i) => (
+              <Banner key={`${q.title}-${i}`} tone="warning">
+                <span className="font-semibold">Passage withheld from the AI</span> — a section of{' '}
+                <span className="italic">{q.title}</span> contains text that looks like an
+                instruction aimed at the assistant ([{q.rule_ids.join(', ')}]). It was not sent to
+                the model.
+              </Banner>
+            ))}
+
           {!result.blocked && result.answer?.abstained && (
             <Banner tone="info">{result.answer.text}</Banner>
           )}

@@ -7,6 +7,9 @@ export interface AuthUser {
 export interface MeResponse extends AuthUser {
   accessible_count: number
   total_count: number
+  embedding_name: string
+  embedding_fallback_reason: string | null
+  indexed_chunk_count: number
 }
 
 export interface DocumentSummary {
@@ -40,11 +43,17 @@ export interface AnswerPayload {
   thinking_level: 'minimal' | 'high' | null
 }
 
+export interface QuarantinedChunk {
+  title: string
+  rule_ids: string[]
+}
+
 export interface AskResponse {
   blocked: boolean
   findings: PromptFinding[]
   answer: AnswerPayload | null
   evidence: EvidenceChunk[]
+  quarantined: QuarantinedChunk[]
 }
 
 export interface DelegationSummary {

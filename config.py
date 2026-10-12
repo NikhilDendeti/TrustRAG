@@ -35,8 +35,8 @@ def load_settings() -> Settings:
         chroma_persist_dir=os.environ.get("CHROMA_PERSIST_DIR", "data/chroma_store"),
         audit_log_path=os.environ.get("AUDIT_LOG_PATH", "data/audit_log.jsonl"),
         demo_users_path=os.environ.get("DEMO_USERS_PATH", "data/demo_users.json"),
-        documents_dir=os.environ.get("DOCUMENTS_DIR", "data/sample_docs"),
-        acl_path=os.environ.get("ACL_PATH", "data/demo_acl.json"),
+        documents_dir=os.environ.get("DOCUMENTS_DIR", "data/handbook"),
+        acl_path=os.environ.get("ACL_PATH", "data/handbook_acl.json"),
         delegations_path=os.environ.get("DELEGATIONS_PATH", "data/delegations.json"),
         retrieval_top_k=int(os.environ.get("RETRIEVAL_TOP_K", "4")),
     )

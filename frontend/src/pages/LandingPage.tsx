@@ -16,9 +16,9 @@ import {
 
 const STATS = [
   { value: '3', label: 'Roles enforced' },
-  { value: '7', label: 'Synthetic documents' },
+  { value: '54', label: 'GitLab Handbook pages' },
   { value: '2×', label: 'Independent ACL checks' },
-  { value: '46', label: 'Passing security tests' },
+  { value: '55', label: 'Passing security tests' },
 ]
 
 const FEATURES = [

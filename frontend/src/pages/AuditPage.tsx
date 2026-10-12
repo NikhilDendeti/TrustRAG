@@ -30,6 +30,7 @@ const EVENT_META: Record<string, { icon: IconComponent; tone: Tone; label: strin
   retrieval_completed: { icon: DocIcon, tone: 'success', label: 'Retrieval completed' },
   prompt_risk_detected: { icon: AlertIcon, tone: 'warning', label: 'Prompt risk detected' },
   unauthorized_chunk_rejected: { icon: LockCheckIcon, tone: 'danger', label: 'Unauthorized chunk rejected' },
+  document_injection_quarantined: { icon: LockCheckIcon, tone: 'warning', label: 'Document injection quarantined' },
   delegation_created: { icon: KeyIcon, tone: 'success', label: 'Delegation granted' },
   delegation_revoked: { icon: KeyIcon, tone: 'warning', label: 'Delegation revoked' },
   delegation_denied: { icon: XCircleIcon, tone: 'danger', label: 'Delegation denied' },

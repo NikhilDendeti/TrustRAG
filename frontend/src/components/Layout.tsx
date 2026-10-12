@@ -70,7 +70,15 @@ function SidebarContent({
   onLogout,
   onNavigate,
 }: {
-  user: { display_name: string; roles: string[]; accessible_count: number; total_count: number } | null
+  user: {
+    display_name: string
+    roles: string[]
+    accessible_count: number
+    total_count: number
+    embedding_name: string
+    embedding_fallback_reason: string | null
+    indexed_chunk_count: number
+  } | null
   onLogout: () => void
   onNavigate?: () => void
 }) {
@@ -91,6 +99,14 @@ function SidebarContent({
           <p className="mt-1 text-xs text-text-muted">
             Accessible documents: {user.accessible_count} of {user.total_count}
           </p>
+          <p className="mt-1 text-xs text-text-muted">
+            Embedding: {user.embedding_name} · {user.indexed_chunk_count} chunks indexed
+          </p>
+          {user.embedding_fallback_reason && (
+            <p className="mt-1 text-xs text-warning">
+              Offline fallback embedding in use: {user.embedding_fallback_reason}
+            </p>
+          )}
         </div>
       )}
 
