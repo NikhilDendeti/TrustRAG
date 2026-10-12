@@ -1,0 +1,817 @@
+{
+  "documents": [
+    {
+      "document_id": "people_anti_harassment",
+      "title": "Anti-Harassment Policy",
+      "file_name": "people_anti_harassment.md",
+      "classification": "internal",
+      "owner_id": "casey_admin",
+      "allowed_roles": [
+        "employee",
+        "manager",
+        "admin"
+      ],
+      "allowed_users": [],
+      "created_at": "2026-10-12T10:24:04Z",
+      "department": "people",
+      "source_url": "https://handbook.gitlab.com/handbook/people-group/anti-harassment"
+    },
+    {
+      "document_id": "people_relocation",
+      "title": "Relocation",
+      "file_name": "people_relocation.md",
+      "classification": "internal",
+      "owner_id": "casey_admin",
+      "allowed_roles": [
+        "employee",
+        "manager",
+        "admin"
+      ],
+      "allowed_users": [],
+      "created_at": "2026-10-12T10:24:04Z",
+      "department": "people",
+      "source_url": "https://handbook.gitlab.com/handbook/people-group/relocation"
+    },
+    {
+      "document_id": "people_contracts_probation_periods",
+      "title": "Contracts, Background Screenings, Probation Periods & PIAA",
+      "file_name": "people_contracts_probation_periods.md",
+      "classification": "internal",
+      "owner_id": "casey_admin",
+      "allowed_roles": [
+        "employee",
+        "manager",
+        "admin"
+      ],
+      "allowed_users": [],
+      "created_at": "2026-10-12T10:24:04Z",
+      "department": "people",
+      "source_url": "https://handbook.gitlab.com/handbook/people-group/contracts-probation-periods"
+    },
+    {
+      "document_id": "people_guidance_on_feedback",
+      "title": "Guidance on Feedback",
+      "file_name": "people_guidance_on_feedback.md",
+      "classification": "internal",
+      "owner_id": "casey_admin",
+      "allowed_roles": [
+        "employee",
+        "manager",
+        "admin"
+      ],
+      "allowed_users": [],
+      "created_at": "2026-10-12T10:24:04Z",
+      "department": "people",
+      "source_url": "https://handbook.gitlab.com/handbook/people-group/guidance-on-feedback"
+    },
+    {
+      "document_id": "people_360_feedback",
+      "title": "360 Feedback",
+      "file_name": "people_360_feedback.md",
+      "classification": "internal",
+      "owner_id": "casey_admin",
+      "allowed_roles": [
+        "employee",
+        "manager",
+        "admin"
+      ],
+      "allowed_users": [],
+      "created_at": "2026-10-12T10:24:04Z",
+      "department": "people",
+      "source_url": "https://handbook.gitlab.com/handbook/people-group/360-feedback"
+    },
+    {
+      "document_id": "people_visas",
+      "title": "Visas",
+      "file_name": "people_visas.md",
+      "classification": "internal",
+      "owner_id": "casey_admin",
+      "allowed_roles": [
+        "employee",
+        "manager",
+        "admin"
+      ],
+      "allowed_users": [],
+      "created_at": "2026-10-12T10:24:04Z",
+      "department": "people",
+      "source_url": "https://handbook.gitlab.com/handbook/people-group/visas"
+    },
+    {
+      "document_id": "people_team_member_relations",
+      "title": "Team Member Relations at GitLab",
+      "file_name": "people_team_member_relations.md",
+      "classification": "internal",
+      "owner_id": "casey_admin",
+      "allowed_roles": [
+        "employee",
+        "manager",
+        "admin"
+      ],
+      "allowed_users": [],
+      "created_at": "2026-10-12T10:24:04Z",
+      "department": "people",
+      "source_url": "https://handbook.gitlab.com/handbook/people-group/team-member-relations"
+    },
+    {
+      "document_id": "people_celebrations",
+      "title": "New Hires, Celebrations and Significant Life Events",
+      "file_name": "people_celebrations.md",
+      "classification": "internal",
+      "owner_id": "casey_admin",
+      "allowed_roles": [
+        "employee",
+        "manager",
+        "admin"
+      ],
+      "allowed_users": [],
+      "created_at": "2026-10-12T10:24:04Z",
+      "department": "people",
+      "source_url": "https://handbook.gitlab.com/handbook/people-group/celebrations"
+    },
+    {
+      "document_id": "people_time_off_and_absence",
+      "title": "Time Off and Absence at GitLab",
+      "file_name": "people_time_off_and_absence.md",
+      "classification": "internal",
+      "owner_id": "casey_admin",
+      "allowed_roles": [
+        "employee",
+        "manager",
+        "admin"
+      ],
+      "allowed_users": [],
+      "created_at": "2026-10-12T10:24:04Z",
+      "department": "people",
+      "source_url": "https://handbook.gitlab.com/handbook/people-group/time-off-and-absence/"
+    },
+    {
+      "document_id": "people_time_off_and_absence_leave_types",
+      "title": "Leave Types",
+      "file_name": "people_time_off_and_absence_leave_types.md",
+      "classification": "internal",
+      "owner_id": "casey_admin",
+      "allowed_roles": [
+        "employee",
+        "manager",
+        "admin"
+      ],
+      "allowed_users": [],
+      "created_at": "2026-10-12T10:24:04Z",
+      "department": "people",
+      "source_url": "https://handbook.gitlab.com/handbook/people-group/time-off-and-absence/leave-types"
+    },
+    {
+      "document_id": "people_time_off_and_absence_time_off_types",
+      "title": "Time Off Types",
+      "file_name": "people_time_off_and_absence_time_off_types.md",
+      "classification": "internal",
+      "owner_id": "casey_admin",
+      "allowed_roles": [
+        "employee",
+        "manager",
+        "admin"
+      ],
+      "allowed_users": [],
+      "created_at": "2026-10-12T10:24:04Z",
+      "department": "people",
+      "source_url": "https://handbook.gitlab.com/handbook/people-group/time-off-and-absence/time-off-types"
+    },
+    {
+      "document_id": "people_time_off_and_absence_time_away_philosophy",
+      "title": "Time Away Philosophy",
+      "file_name": "people_time_off_and_absence_time_away_philosophy.md",
+      "classification": "internal",
+      "owner_id": "casey_admin",
+      "allowed_roles": [
+        "employee",
+        "manager",
+        "admin"
+      ],
+      "allowed_users": [],
+      "created_at": "2026-10-12T10:24:04Z",
+      "department": "people",
+      "source_url": "https://handbook.gitlab.com/handbook/people-group/time-off-and-absence/time-away-philosophy"
+    },
+    {
+      "document_id": "engineering_performance",
+      "title": "Performance",
+      "file_name": "engineering_performance.md",
+      "classification": "internal",
+      "owner_id": "casey_admin",
+      "allowed_roles": [
+        "employee",
+        "manager",
+        "admin"
+      ],
+      "allowed_users": [],
+      "created_at": "2026-10-12T10:24:04Z",
+      "department": "engineering",
+      "source_url": "https://handbook.gitlab.com/handbook/engineering/performance"
+    },
+    {
+      "document_id": "engineering_recognition",
+      "title": "Recognition in Engineering",
+      "file_name": "engineering_recognition.md",
+      "classification": "internal",
+      "owner_id": "casey_admin",
+      "allowed_roles": [
+        "employee",
+        "manager",
+        "admin"
+      ],
+      "allowed_users": [],
+      "created_at": "2026-10-12T10:24:04Z",
+      "department": "engineering",
+      "source_url": "https://handbook.gitlab.com/handbook/engineering/recognition"
+    },
+    {
+      "document_id": "engineering_error_budgets",
+      "title": "Engineering Error Budgets",
+      "file_name": "engineering_error_budgets.md",
+      "classification": "internal",
+      "owner_id": "casey_admin",
+      "allowed_roles": [
+        "employee",
+        "manager",
+        "admin"
+      ],
+      "allowed_users": [],
+      "created_at": "2026-10-12T10:24:04Z",
+      "department": "engineering",
+      "source_url": "https://handbook.gitlab.com/handbook/engineering/error-budgets/"
+    },
+    {
+      "document_id": "engineering_open_source",
+      "title": "Open Source at GitLab",
+      "file_name": "engineering_open_source.md",
+      "classification": "internal",
+      "owner_id": "casey_admin",
+      "allowed_roles": [
+        "employee",
+        "manager",
+        "admin"
+      ],
+      "allowed_users": [],
+      "created_at": "2026-10-12T10:24:04Z",
+      "department": "engineering",
+      "source_url": "https://handbook.gitlab.com/handbook/engineering/open-source/"
+    },
+    {
+      "document_id": "engineering_releases",
+      "title": "GitLab Releases",
+      "file_name": "engineering_releases.md",
+      "classification": "internal",
+      "owner_id": "casey_admin",
+      "allowed_roles": [
+        "employee",
+        "manager",
+        "admin"
+      ],
+      "allowed_users": [],
+      "created_at": "2026-10-12T10:24:04Z",
+      "department": "engineering",
+      "source_url": "https://handbook.gitlab.com/handbook/engineering/releases/"
+    },
+    {
+      "document_id": "finance_expenses",
+      "title": "Global Travel and Expense Policy",
+      "file_name": "finance_expenses.md",
+      "classification": "restricted",
+      "owner_id": "bob_manager",
+      "allowed_roles": [
+        "manager",
+        "admin"
+      ],
+      "allowed_users": [],
+      "created_at": "2026-10-12T10:24:04Z",
+      "department": "finance",
+      "source_url": "https://handbook.gitlab.com/handbook/finance/expenses"
+    },
+    {
+      "document_id": "finance_spending_company_money",
+      "title": "Spending Company Money",
+      "file_name": "finance_spending_company_money.md",
+      "classification": "restricted",
+      "owner_id": "bob_manager",
+      "allowed_roles": [
+        "manager",
+        "admin"
+      ],
+      "allowed_users": [],
+      "created_at": "2026-10-12T10:24:04Z",
+      "department": "finance",
+      "source_url": "https://handbook.gitlab.com/handbook/finance/spending-company-money"
+    },
+    {
+      "document_id": "finance_investor_relations",
+      "title": "Investor Relations",
+      "file_name": "finance_investor_relations.md",
+      "classification": "restricted",
+      "owner_id": "bob_manager",
+      "allowed_roles": [
+        "manager",
+        "admin"
+      ],
+      "allowed_users": [],
+      "created_at": "2026-10-12T10:24:04Z",
+      "department": "finance",
+      "source_url": "https://handbook.gitlab.com/handbook/finance/investor-relations"
+    },
+    {
+      "document_id": "finance_committee_composition",
+      "title": "Committee Composition",
+      "file_name": "finance_committee_composition.md",
+      "classification": "restricted",
+      "owner_id": "bob_manager",
+      "allowed_roles": [
+        "manager",
+        "admin"
+      ],
+      "allowed_users": [],
+      "created_at": "2026-10-12T10:24:04Z",
+      "department": "finance",
+      "source_url": "https://handbook.gitlab.com/handbook/finance/committee-composition"
+    },
+    {
+      "document_id": "finance_travel",
+      "title": "Travel Safety and Security",
+      "file_name": "finance_travel.md",
+      "classification": "restricted",
+      "owner_id": "bob_manager",
+      "allowed_roles": [
+        "manager",
+        "admin"
+      ],
+      "allowed_users": [],
+      "created_at": "2026-10-12T10:24:04Z",
+      "department": "finance",
+      "source_url": "https://handbook.gitlab.com/handbook/finance/travel/"
+    },
+    {
+      "document_id": "finance_procurement",
+      "title": "The GitLab Procurement Team",
+      "file_name": "finance_procurement.md",
+      "classification": "restricted",
+      "owner_id": "bob_manager",
+      "allowed_roles": [
+        "manager",
+        "admin"
+      ],
+      "allowed_users": [],
+      "created_at": "2026-10-12T10:24:04Z",
+      "department": "finance",
+      "source_url": "https://handbook.gitlab.com/handbook/finance/procurement/"
+    },
+    {
+      "document_id": "finance_procurement_consultants",
+      "title": "External Consultant Orientation & Access Deprovisioning",
+      "file_name": "finance_procurement_consultants.md",
+      "classification": "restricted",
+      "owner_id": "bob_manager",
+      "allowed_roles": [
+        "manager",
+        "admin"
+      ],
+      "allowed_users": [],
+      "created_at": "2026-10-12T10:24:04Z",
+      "department": "finance",
+      "source_url": "https://handbook.gitlab.com/handbook/finance/procurement/consultants"
+    },
+    {
+      "document_id": "finance_procurement_contingent_worker_policy",
+      "title": "Contingent Worker Policy",
+      "file_name": "finance_procurement_contingent_worker_policy.md",
+      "classification": "restricted",
+      "owner_id": "bob_manager",
+      "allowed_roles": [
+        "manager",
+        "admin"
+      ],
+      "allowed_users": [],
+      "created_at": "2026-10-12T10:24:04Z",
+      "department": "finance",
+      "source_url": "https://handbook.gitlab.com/handbook/finance/procurement/contingent-worker-policy"
+    },
+    {
+      "document_id": "finance_procurement_individual_use_software",
+      "title": "Individual Use Software",
+      "file_name": "finance_procurement_individual_use_software.md",
+      "classification": "restricted",
+      "owner_id": "bob_manager",
+      "allowed_roles": [
+        "manager",
+        "admin"
+      ],
+      "allowed_users": [],
+      "created_at": "2026-10-12T10:24:04Z",
+      "department": "finance",
+      "source_url": "https://handbook.gitlab.com/handbook/finance/procurement/individual-use-software"
+    },
+    {
+      "document_id": "security_password_guidelines",
+      "title": "GitLab Password Guidelines",
+      "file_name": "security_password_guidelines.md",
+      "classification": "restricted",
+      "owner_id": "casey_admin",
+      "allowed_roles": [
+        "manager",
+        "admin"
+      ],
+      "allowed_users": [],
+      "created_at": "2026-10-12T10:24:04Z",
+      "department": "security",
+      "source_url": "https://handbook.gitlab.com/handbook/security/password-guidelines"
+    },
+    {
+      "document_id": "security_responding_to_ransomware",
+      "title": "Responding to Ransomware",
+      "file_name": "security_responding_to_ransomware.md",
+      "classification": "restricted",
+      "owner_id": "casey_admin",
+      "allowed_roles": [
+        "manager",
+        "admin"
+      ],
+      "allowed_users": [],
+      "created_at": "2026-10-12T10:24:04Z",
+      "department": "security",
+      "source_url": "https://handbook.gitlab.com/handbook/security/responding-to-ransomware"
+    },
+    {
+      "document_id": "security_root_cause_analysis",
+      "title": "Root Cause Analysis for Critical Vulnerabilities",
+      "file_name": "security_root_cause_analysis.md",
+      "classification": "restricted",
+      "owner_id": "casey_admin",
+      "allowed_roles": [
+        "manager",
+        "admin"
+      ],
+      "allowed_users": [],
+      "created_at": "2026-10-12T10:24:04Z",
+      "department": "security",
+      "source_url": "https://handbook.gitlab.com/handbook/security/root-cause-analysis"
+    },
+    {
+      "document_id": "security_information_system_contingency_plan_iscp",
+      "title": "Information System Contingency Plan (ISCP)",
+      "file_name": "security_information_system_contingency_plan_iscp.md",
+      "classification": "restricted",
+      "owner_id": "casey_admin",
+      "allowed_roles": [
+        "manager",
+        "admin"
+      ],
+      "allowed_users": [],
+      "created_at": "2026-10-12T10:24:04Z",
+      "department": "security",
+      "source_url": "https://handbook.gitlab.com/handbook/security/information-system-contingency-plan-iscp"
+    },
+    {
+      "document_id": "security_external_secret_storage",
+      "title": "Setting up external secret storage with Vault",
+      "file_name": "security_external_secret_storage.md",
+      "classification": "restricted",
+      "owner_id": "casey_admin",
+      "allowed_roles": [
+        "manager",
+        "admin"
+      ],
+      "allowed_users": [],
+      "created_at": "2026-10-12T10:24:04Z",
+      "department": "security",
+      "source_url": "https://handbook.gitlab.com/handbook/security/external-secret-storage"
+    },
+    {
+      "document_id": "security_network_isolation",
+      "title": "Isolating your work laptop from other devices in your home network",
+      "file_name": "security_network_isolation.md",
+      "classification": "restricted",
+      "owner_id": "casey_admin",
+      "allowed_roles": [
+        "manager",
+        "admin"
+      ],
+      "allowed_users": [],
+      "created_at": "2026-10-12T10:24:04Z",
+      "department": "security",
+      "source_url": "https://handbook.gitlab.com/handbook/security/network-isolation"
+    },
+    {
+      "document_id": "security_security_change_management_procedure",
+      "title": "Security Change Management Procedure",
+      "file_name": "security_security_change_management_procedure.md",
+      "classification": "restricted",
+      "owner_id": "casey_admin",
+      "allowed_roles": [
+        "manager",
+        "admin"
+      ],
+      "allowed_users": [],
+      "created_at": "2026-10-12T10:24:04Z",
+      "department": "security",
+      "source_url": "https://handbook.gitlab.com/handbook/security/security-change-management-procedure"
+    },
+    {
+      "document_id": "security_isms",
+      "title": "Information Security and Artificial Intelligence Management System",
+      "file_name": "security_isms.md",
+      "classification": "restricted",
+      "owner_id": "casey_admin",
+      "allowed_roles": [
+        "manager",
+        "admin"
+      ],
+      "allowed_users": [],
+      "created_at": "2026-10-12T10:24:04Z",
+      "department": "security",
+      "source_url": "https://handbook.gitlab.com/handbook/security/isms"
+    },
+    {
+      "document_id": "security_controlled_document_procedure",
+      "title": "Controlled Document Procedure",
+      "file_name": "security_controlled_document_procedure.md",
+      "classification": "restricted",
+      "owner_id": "casey_admin",
+      "allowed_roles": [
+        "manager",
+        "admin"
+      ],
+      "allowed_users": [],
+      "created_at": "2026-10-12T10:24:04Z",
+      "department": "security",
+      "source_url": "https://handbook.gitlab.com/handbook/security/controlled-document-procedure"
+    },
+    {
+      "document_id": "security_security_and_technology_policy_exception",
+      "title": "Security and Technology Policy Exception Process",
+      "file_name": "security_security_and_technology_policy_exception.md",
+      "classification": "restricted",
+      "owner_id": "casey_admin",
+      "allowed_roles": [
+        "manager",
+        "admin"
+      ],
+      "allowed_users": [],
+      "created_at": "2026-10-12T10:24:04Z",
+      "department": "security",
+      "source_url": "https://handbook.gitlab.com/handbook/security/security-and-technology-policy-exception"
+    },
+    {
+      "document_id": "security_security_observations_risk_management",
+      "title": "Unified Security Risk Management (USRM) Program",
+      "file_name": "security_security_observations_risk_management.md",
+      "classification": "restricted",
+      "owner_id": "casey_admin",
+      "allowed_roles": [
+        "manager",
+        "admin"
+      ],
+      "allowed_users": [],
+      "created_at": "2026-10-12T10:24:04Z",
+      "department": "security",
+      "source_url": "https://handbook.gitlab.com/handbook/security/security-observations-risk-management"
+    },
+    {
+      "document_id": "security_pgp_process",
+      "title": "PGP Process",
+      "file_name": "security_pgp_process.md",
+      "classification": "restricted",
+      "owner_id": "casey_admin",
+      "allowed_roles": [
+        "manager",
+        "admin"
+      ],
+      "allowed_users": [],
+      "created_at": "2026-10-12T10:24:04Z",
+      "department": "security",
+      "source_url": "https://handbook.gitlab.com/handbook/security/pgp_process"
+    },
+    {
+      "document_id": "legal_anti_corruption_policy",
+      "title": "Anti-Corruption Policy",
+      "file_name": "legal_anti_corruption_policy.md",
+      "classification": "confidential",
+      "owner_id": "casey_admin",
+      "allowed_roles": [
+        "admin"
+      ],
+      "allowed_users": [],
+      "created_at": "2026-10-12T10:24:04Z",
+      "department": "legal",
+      "source_url": "https://handbook.gitlab.com/handbook/legal/anti-corruption-policy"
+    },
+    {
+      "document_id": "legal_anti_fraud_policy",
+      "title": "Anti-Fraud Policy",
+      "file_name": "legal_anti_fraud_policy.md",
+      "classification": "confidential",
+      "owner_id": "casey_admin",
+      "allowed_roles": [
+        "admin"
+      ],
+      "allowed_users": [],
+      "created_at": "2026-10-12T10:24:04Z",
+      "department": "legal",
+      "source_url": "https://handbook.gitlab.com/handbook/legal/anti-fraud-policy"
+    },
+    {
+      "document_id": "legal_anti_retaliation_policy",
+      "title": "Anti-Retaliation Policy",
+      "file_name": "legal_anti_retaliation_policy.md",
+      "classification": "confidential",
+      "owner_id": "casey_admin",
+      "allowed_roles": [
+        "admin"
+      ],
+      "allowed_users": [],
+      "created_at": "2026-10-12T10:24:04Z",
+      "department": "legal",
+      "source_url": "https://handbook.gitlab.com/handbook/legal/anti-retaliation-policy"
+    },
+    {
+      "document_id": "legal_whistleblowing",
+      "title": "Whistleblowing at GitLab",
+      "file_name": "legal_whistleblowing.md",
+      "classification": "confidential",
+      "owner_id": "casey_admin",
+      "allowed_roles": [
+        "admin"
+      ],
+      "allowed_users": [],
+      "created_at": "2026-10-12T10:24:04Z",
+      "department": "legal",
+      "source_url": "https://handbook.gitlab.com/handbook/legal/whistleblowing"
+    },
+    {
+      "document_id": "legal_record_retention_policy",
+      "title": "Record Retention Policy",
+      "file_name": "legal_record_retention_policy.md",
+      "classification": "confidential",
+      "owner_id": "casey_admin",
+      "allowed_roles": [
+        "admin"
+      ],
+      "allowed_users": [],
+      "created_at": "2026-10-12T10:24:04Z",
+      "department": "legal",
+      "source_url": "https://handbook.gitlab.com/handbook/legal/record-retention-policy"
+    },
+    {
+      "document_id": "legal_trade_compliance",
+      "title": "Trade Compliance",
+      "file_name": "legal_trade_compliance.md",
+      "classification": "confidential",
+      "owner_id": "casey_admin",
+      "allowed_roles": [
+        "admin"
+      ],
+      "allowed_users": [],
+      "created_at": "2026-10-12T10:24:04Z",
+      "department": "legal",
+      "source_url": "https://handbook.gitlab.com/handbook/legal/trade-compliance"
+    },
+    {
+      "document_id": "legal_employment_law",
+      "title": "Legal, Employment at GitLab: A Strategic Partnership",
+      "file_name": "legal_employment_law.md",
+      "classification": "confidential",
+      "owner_id": "casey_admin",
+      "allowed_roles": [
+        "admin"
+      ],
+      "allowed_users": [],
+      "created_at": "2026-10-12T10:24:04Z",
+      "department": "legal",
+      "source_url": "https://handbook.gitlab.com/handbook/legal/employment-law"
+    },
+    {
+      "document_id": "legal_gitlab_related_party_transactions_policy",
+      "title": "GitLab Related Party Transactions Policy",
+      "file_name": "legal_gitlab_related_party_transactions_policy.md",
+      "classification": "confidential",
+      "owner_id": "casey_admin",
+      "allowed_roles": [
+        "admin"
+      ],
+      "allowed_users": [],
+      "created_at": "2026-10-12T10:24:04Z",
+      "department": "legal",
+      "source_url": "https://handbook.gitlab.com/handbook/legal/gitlab-related-party-transactions-policy"
+    },
+    {
+      "document_id": "legal_risk_management_dispute_resolution",
+      "title": "Risk Management and Dispute Resolution (RMDR)",
+      "file_name": "legal_risk_management_dispute_resolution.md",
+      "classification": "confidential",
+      "owner_id": "casey_admin",
+      "allowed_roles": [
+        "admin"
+      ],
+      "allowed_users": [],
+      "created_at": "2026-10-12T10:24:04Z",
+      "department": "legal",
+      "source_url": "https://handbook.gitlab.com/handbook/legal/risk-management-dispute-resolution"
+    },
+    {
+      "document_id": "legal_competitor_discussion_guidelines",
+      "title": "Guidelines on public discussion of competitor product features",
+      "file_name": "legal_competitor_discussion_guidelines.md",
+      "classification": "confidential",
+      "owner_id": "casey_admin",
+      "allowed_roles": [
+        "admin"
+      ],
+      "allowed_users": [],
+      "created_at": "2026-10-12T10:24:04Z",
+      "department": "legal",
+      "source_url": "https://handbook.gitlab.com/handbook/legal/competitor-discussion-guidelines"
+    },
+    {
+      "document_id": "compensation_incentives",
+      "title": "Incentives at GitLab",
+      "file_name": "compensation_incentives.md",
+      "classification": "confidential",
+      "owner_id": "casey_admin",
+      "allowed_roles": [
+        "admin"
+      ],
+      "allowed_users": [],
+      "created_at": "2026-10-12T10:24:04Z",
+      "department": "compensation",
+      "source_url": "https://handbook.gitlab.com/handbook/total-rewards/incentives"
+    },
+    {
+      "document_id": "compensation_stock_options",
+      "title": "Equity Compensation",
+      "file_name": "compensation_stock_options.md",
+      "classification": "confidential",
+      "owner_id": "casey_admin",
+      "allowed_roles": [
+        "admin"
+      ],
+      "allowed_users": [],
+      "created_at": "2026-10-12T10:24:04Z",
+      "department": "compensation",
+      "source_url": "https://handbook.gitlab.com/handbook/total-rewards/stock-options"
+    },
+    {
+      "document_id": "compensation_compensation",
+      "title": "Compensation at Gitlab",
+      "file_name": "compensation_compensation.md",
+      "classification": "confidential",
+      "owner_id": "casey_admin",
+      "allowed_roles": [
+        "admin"
+      ],
+      "allowed_users": [],
+      "created_at": "2026-10-12T10:24:04Z",
+      "department": "compensation",
+      "source_url": "https://handbook.gitlab.com/handbook/total-rewards/compensation/"
+    },
+    {
+      "document_id": "compensation_benefits",
+      "title": "Benefits",
+      "file_name": "compensation_benefits.md",
+      "classification": "confidential",
+      "owner_id": "casey_admin",
+      "allowed_roles": [
+        "admin"
+      ],
+      "allowed_users": [],
+      "created_at": "2026-10-12T10:24:04Z",
+      "department": "compensation",
+      "source_url": "https://handbook.gitlab.com/handbook/total-rewards/benefits/"
+    },
+    {
+      "document_id": "compensation_benefits_parental_leave_toolkit",
+      "title": "Leave of Absence Toolkit for Team Members and Managers",
+      "file_name": "compensation_benefits_parental_leave_toolkit.md",
+      "classification": "confidential",
+      "owner_id": "casey_admin",
+      "allowed_roles": [
+        "admin"
+      ],
+      "allowed_users": [],
+      "created_at": "2026-10-12T10:24:04Z",
+      "department": "compensation",
+      "source_url": "https://handbook.gitlab.com/handbook/total-rewards/benefits/parental-leave-toolkit"
+    },
+    {
+      "document_id": "fixture_vendor_faq_injection",
+      "title": "Vendor FAQ — Security Test Fixture",
+      "file_name": "fixture_vendor_faq_injection.md",
+      "classification": "internal_untrusted_test_fixture",
+      "owner_id": "casey_admin",
+      "allowed_roles": [
+        "employee",
+        "manager",
+        "admin"
+      ],
+      "allowed_users": [],
+      "created_at": "2026-10-12T10:24:04Z",
+      "department": "fixture",
+      "source_url": ""
+    }
+  ]
+}

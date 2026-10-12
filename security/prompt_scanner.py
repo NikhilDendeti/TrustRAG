@@ -105,14 +105,41 @@ _RULES: list[_Rule] = [
 ]
 
 
-def scan_prompt(prompt: str) -> list[Finding]:
-    """Runs all heuristic rules against the prompt and returns structured findings.
+def _rule(rule_id: str) -> _Rule:
+    return next(rule for rule in _RULES if rule.rule_id == rule_id)
 
-    Findings are ordered by severity (high first) for display convenience.
-    """
+
+# Rules applied to RETRIEVED DOCUMENT TEXT (indirect prompt injection), as
+# opposed to the user's own question. PI-004 is deliberately excluded: real
+# policy documents legitimately talk about "confidential information", so it
+# would quarantine honest content. DI-005 targets text that addresses the
+# assistant's own output ("...in your response"), the dominant pattern in the
+# BIPIA benchmark's training split; ordinary company documents almost never
+# speak to the reader about "your answer".
+_DOCUMENT_RULES: list[_Rule] = [
+    _Rule("DI-001", "Embedded instruction override", Severity.HIGH,
+          "The document text tells the assistant to ignore or override its instructions.",
+          _rule("PI-001").pattern),
+    _Rule("DI-002", "Embedded system-prompt extraction", Severity.HIGH,
+          "The document text tells the assistant to reveal its hidden prompt or configuration.",
+          _rule("PI-002").pattern),
+    _Rule("DI-003", "Embedded safeguard bypass / secret disclosure", Severity.HIGH,
+          "The document text tells the assistant to bypass safeguards or disclose secrets.",
+          _rule("PI-003").pattern),
+    _Rule("DI-004", "Embedded persona override", Severity.HIGH,
+          "The document text tells the assistant to adopt an unrestricted persona.",
+          _rule("PI-005").pattern),
+    _Rule("DI-005", "Embedded directive targeting the assistant's output", Severity.HIGH,
+          "The document text gives orders about the assistant's own response "
+          "(e.g. 'add ... to your answer'), which legitimate reference content does not do.",
+          re.compile(r"\byour\s+(response|answer|reply|output)\b", re.IGNORECASE)),
+]
+
+
+def _scan(text: str, rules: list[_Rule]) -> list[Finding]:
     findings: list[Finding] = []
-    for rule in _RULES:
-        match = rule.pattern.search(prompt)
+    for rule in rules:
+        match = rule.pattern.search(text)
         if match:
             evidence = match.group(0).strip()
             findings.append(
@@ -128,6 +155,24 @@ def scan_prompt(prompt: str) -> list[Finding]:
     order = {Severity.HIGH: 0, Severity.MEDIUM: 1, Severity.LOW: 2}
     findings.sort(key=lambda finding: order[finding.severity])
     return findings
+
+
+def scan_prompt(prompt: str) -> list[Finding]:
+    """Runs all heuristic rules against the prompt and returns structured findings.
+
+    Findings are ordered by severity (high first) for display convenience.
+    """
+    return _scan(prompt, _RULES)
+
+
+def scan_document_text(text: str) -> list[Finding]:
+    """Runs the document-injection rules against retrieved passage text.
+
+    Heuristic, like `scan_prompt`: an attacker who phrases an injection as an
+    ordinary sentence or question will not be caught here. See
+    `evaluation/results.md` for the measured detection and false-positive rates.
+    """
+    return _scan(text, _DOCUMENT_RULES)
 
 
 def policy_decision(findings: list[Finding]) -> str:

@@ -7,3 +7,5 @@ data/audit_log.jsonl
 data/delegations.json.tmp
 .venv/
 venv/
+data/bipia/
+.claude/

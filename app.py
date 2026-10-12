@@ -27,6 +27,7 @@ from ingestion.loader import (
 from rag.answerer import answer_question
 from rag.indexer import ChromaIndex
 from rag.retriever import retrieve_authorized_chunks
+from security.context_guard import guard_retrieved_chunks
 from security.prompt_scanner import policy_decision, scan_prompt
 
 st.set_page_config(page_title="TrustRAG — Secure Enterprise AI", layout="wide")
@@ -42,10 +43,11 @@ def get_audit_log() -> HashChainAuditLog:
 @st.cache_resource
 def get_index_and_corpus():
     corpus = load_documents(SETTINGS.acl_path, SETTINGS.documents_dir)
-    index = ChromaIndex(persist_dir=SETTINGS.chroma_persist_dir)
-    index.reset()
+    index = ChromaIndex(
+        persist_dir=SETTINGS.chroma_persist_dir, embedding_model=SETTINGS.embedding_model
+    )
     texts = {d.document_id: load_document_text(SETTINGS.documents_dir, d) for d in corpus.documents}
-    index.index_documents(corpus.documents, texts)
+    index.ensure_indexed(corpus.documents, texts)
     return index, corpus
 
 
@@ -111,7 +113,14 @@ if current_user is None:
     del st.session_state["auth_user_id"]
     st.rerun()
 
-index, corpus = get_index_and_corpus()
+with st.spinner("Preparing the document index (first run embeds the whole corpus)…"):
+    index, corpus = get_index_and_corpus()
+
+if index.embedding_fallback_reason:
+    st.sidebar.warning(
+        "Using the offline hashing embedding (lower retrieval quality): "
+        f"{index.embedding_fallback_reason}"
+    )
 
 if corpus.rejected:
     st.sidebar.warning(
@@ -133,6 +142,7 @@ accessible_ids = get_authorized_document_ids(
     current_user, corpus.documents, st.session_state.delegations, datetime.now(timezone.utc)
 )
 st.sidebar.markdown(f"**Accessible documents:** {len(accessible_ids)} of {len(corpus.documents)}")
+st.sidebar.caption(f"Embedding: {index.embedding_name} · {index.count()} chunks indexed")
 
 page = st.sidebar.radio(
     "Page",
@@ -211,9 +221,30 @@ if page == "Secure AI Assistant":
                     {"count": len(result.rejected_unauthorized_chunk_ids)},
                 )
 
+            # Indirect prompt injection guard: authorized chunks whose text
+            # tries to give the assistant orders are withheld from the model.
+            guard = guard_retrieved_chunks(result.chunks)
+            if guard.quarantined:
+                audit_log.append(
+                    "document_injection_quarantined",
+                    current_user.user_id,
+                    {
+                        "chunk_ids": [q.chunk.chunk_id for q in guard.quarantined],
+                        "rule_ids": sorted({f.rule_id for q in guard.quarantined for f in q.findings}),
+                    },
+                )
+                for quarantined in guard.quarantined:
+                    rules = ", ".join(f.rule_id for f in quarantined.findings)
+                    st.warning(
+                        f"**Passage withheld from the AI** — a section of *{quarantined.chunk.title}* "
+                        f"contains text that looks like an instruction aimed at the assistant "
+                        f"([{rules}]). It was not sent to the model."
+                    )
+            safe_chunks = guard.clean_chunks
+
             thinking_level = "high" if reasoning_mode else "minimal"
 
-            if not result.chunks:
+            if not safe_chunks:
                 audit_log.append("retrieval_completed", current_user.user_id, {"outcome": "abstained"})
             else:
                 audit_log.append(
@@ -221,12 +252,12 @@ if page == "Secure AI Assistant":
                     current_user.user_id,
                     {
                         "outcome": "answered",
-                        "chunk_count": len(result.chunks),
+                        "chunk_count": len(safe_chunks),
                         "thinking_level": thinking_level,
                     },
                 )
 
-            answer = answer_question(SETTINGS, question, result.chunks, thinking_level=thinking_level)
+            answer = answer_question(SETTINGS, question, safe_chunks, thinking_level=thinking_level)
 
             if answer.abstained:
                 st.info(answer.answer_text)
@@ -240,7 +271,7 @@ if page == "Secure AI Assistant":
 
                 if answer.citations:
                     with st.expander("Source evidence"):
-                        for chunk in result.chunks:
+                        for chunk in safe_chunks:
                             source_id = f"doc:{chunk.document_id}#{chunk.chunk_index}"
                             st.markdown(f"**[{source_id}]** — *{chunk.title}* ({chunk.classification})")
                             st.text(chunk.text)
@@ -397,6 +428,19 @@ enter the model's context, even if it was returned by the vector search.
 (instruction overrides, hidden-prompt extraction, safeguard bypass attempts,
 restricted-document requests). The absence of a match does **not** mean a
 prompt is safe — this is a mitigation layer, not a guarantee.
+
+**Retrieved documents are scanned too.** A document a user is allowed to read
+can still contain text aimed at the assistant (indirect prompt injection).
+Each retrieved passage is scanned, and any passage that appears to give the
+assistant orders is withheld from the model and recorded in the audit log.
+Measured on Microsoft's BIPIA benchmark this heuristic catches only part of
+the attacks (see `evaluation/results.md`), so the system prompt additionally
+marks every passage as untrusted quoted data.
+
+**The corpus is real content with a demo access policy.** The documents are
+pages from the public, MIT-licensed GitLab Handbook. The classifications and
+role restrictions were assigned per department for this demo and are not
+GitLab's own access rules.
 
 **Time-limited delegation** lets a user who can already access a document
 grant another user scoped, expiring access to that one document. Expiry and
