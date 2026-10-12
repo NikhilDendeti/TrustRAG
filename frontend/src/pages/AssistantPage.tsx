@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from 'react'
 import { api, ApiError, type AskResponse } from '../api'
 import { ChevronDownIcon, InfoIcon, SparkleIcon } from '../components/icons'
+import { Markdown } from '../components/Markdown'
 import { Badge, Banner, Button, Card, Spinner, TextInput } from '../components/ui'
 
 export function AssistantPage() {
@@ -133,7 +134,7 @@ export function AssistantPage() {
                 <Banner tone="warning">{result.answer.text}</Banner>
               ) : (
                 <>
-                  <p className="whitespace-pre-wrap leading-relaxed">{result.answer.text}</p>
+                  <Markdown text={result.answer.text} />
                   {result.answer.thinking_level === 'high' && (
                     <p className="mt-3 flex items-center gap-1.5 text-xs text-text-muted">
                       <SparkleIcon className="h-3.5 w-3.5 text-accent" />
