@@ -92,7 +92,9 @@ trustrag/
 ├── tests/                    # pytest suite (55 tests)
 ├── .env.example
 ├── requirements.txt
-├── Procfile / railway.json / runtime.txt   # Railway deployment
+├── requirements-server.txt    # minimal runtime deps for server.py (no streamlit/pytest)
+├── Dockerfile / .dockerignore  # Railway deployment (two-stage: Node build, Python runtime)
+├── railway.json / Procfile / runtime.txt   # Railway config / buildpack fallback
 └── README.md
 ```
 
@@ -285,18 +287,32 @@ unconfigured LLM provider so they never depend on network access). Covers:
 
 ## Deploying to Railway
 
-This repo includes `Procfile`, `railway.json`, and `runtime.txt`.
+This repo deploys as a single Docker container running `server.py` (FastAPI)
+with the built React app served from the same process — see `Dockerfile`
+and `railway.json` (`"builder": "DOCKERFILE"`). The build is two stages:
+Node builds `frontend/dist`, then it's copied into a slim Python 3.12 image
+that installs only `requirements-server.txt` (no Streamlit/pytest — those
+are dev-only, see `requirements.txt` for the full local-dev set).
+
+**Why Docker instead of Railway's Nixpacks auto-detect:** this repo has both
+`requirements.txt` at the root and `frontend/package.json` nested one level
+down. Nixpacks' auto-detection picks a single primary language from root
+markers, so it would build the Python side and silently skip the frontend
+build entirely. The Dockerfile makes the two-stage build explicit and
+reproducible — verified locally with `docker build . && docker run` before
+every push.
 
 1. Push this repo to GitHub (or use `railway up` from this directory with the
    [Railway CLI](https://docs.railway.app/guides/cli)).
-2. In Railway, create a new project from the repo.
+2. In Railway, create a new project from the repo. It will detect the
+   `Dockerfile` automatically via `railway.json`.
 3. Set environment variables in the Railway project settings (mirror
    `.env.example`): at minimum `GOOGLE_API_KEY` and `GEMMA_MODEL`. Leave the
    storage-path variables at their defaults unless you attach a volume (see
    note below).
-4. Railway's Nixpacks builder auto-installs `requirements.txt` and runs the
-   `Procfile`'s `web` process, which binds Streamlit to Railway's `$PORT`.
-5. Deploy. Railway gives you a public `*.up.railway.app` URL.
+4. Deploy. Railway gives you a public `*.up.railway.app` URL. The
+   `healthcheckPath: "/"` in `railway.json` is given a 120s timeout to allow
+   for first-boot corpus indexing (see below).
 
 **Ephemeral storage note:** by default, Railway's container filesystem is
 ephemeral — the ChromaDB index, audit log, and any delegations created at
@@ -304,7 +320,20 @@ runtime reset on every redeploy. That's fine for a hackathon demo (the index
 rebuilds from `data/handbook/` + `data/handbook_acl.json` on startup, which
 includes re-downloading the 80 MB embedding model and a minute or two of
 embedding; set `EMBEDDING_MODEL=trustrag-local-hashing-v1` to skip both). For a
-persistent demo across redeploys, attach a Railway volume mounted at `data/`.
+persistent demo across redeploys, attach a Railway volume mounted at `/app/data`.
+
+**Local verification before you deploy:**
+
+```bash
+docker build -t trustrag .
+docker run -p 8000:8000 \
+  -e PORT=8000 \
+  -e GOOGLE_API_KEY=... \
+  -e GEMMA_MODEL=gemma-4-26b-a4b-it \
+  trustrag
+```
+
+Then open `http://localhost:8000` — this is exactly what Railway will run.
 
 ## Limitations (also shown in-app under "About and Limitations")
 
