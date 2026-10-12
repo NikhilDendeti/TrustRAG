@@ -1,0 +1,5 @@
+streamlit>=1.38
+chromadb>=0.5
+python-dotenv>=1.0
+google-genai>=1.0
+pytest>=8.0

@@ -1,0 +1,74 @@
+{
+  "documents": [
+    {
+      "document_id": "leave_policy",
+      "title": "Employee Leave Policy",
+      "file_name": "leave_policy.md",
+      "classification": "public",
+      "owner_id": "casey_admin",
+      "allowed_roles": ["employee", "manager", "admin"],
+      "allowed_users": [],
+      "created_at": "2026-09-01T09:00:00Z"
+    },
+    {
+      "document_id": "employee_handbook",
+      "title": "Employee Handbook — Quick Reference",
+      "file_name": "employee_handbook.md",
+      "classification": "public",
+      "owner_id": "casey_admin",
+      "allowed_roles": ["employee", "manager", "admin"],
+      "allowed_users": [],
+      "created_at": "2026-08-15T09:00:00Z"
+    },
+    {
+      "document_id": "prompt_injection_test",
+      "title": "Vendor FAQ — Security Test Fixture",
+      "file_name": "prompt_injection_test.md",
+      "classification": "public_with_untrusted_test_fixture",
+      "owner_id": "casey_admin",
+      "allowed_roles": ["employee", "manager", "admin"],
+      "allowed_users": [],
+      "created_at": "2026-10-05T09:00:00Z"
+    },
+    {
+      "document_id": "department_budget",
+      "title": "Engineering Department Budget — Demo Data",
+      "file_name": "department_budget.md",
+      "classification": "restricted",
+      "owner_id": "bob_manager",
+      "allowed_roles": ["manager", "admin"],
+      "allowed_users": [],
+      "created_at": "2026-10-01T09:00:00Z"
+    },
+    {
+      "document_id": "security_incident_playbook",
+      "title": "Security Incident Playbook",
+      "file_name": "security_incident_playbook.md",
+      "classification": "restricted",
+      "owner_id": "casey_admin",
+      "allowed_roles": ["manager", "admin"],
+      "allowed_users": [],
+      "created_at": "2026-09-12T09:00:00Z"
+    },
+    {
+      "document_id": "ceo_salary_report",
+      "title": "Executive Compensation Report — Demo Data",
+      "file_name": "ceo_salary_report.md",
+      "classification": "confidential",
+      "owner_id": "casey_admin",
+      "allowed_roles": ["admin"],
+      "allowed_users": [],
+      "created_at": "2026-10-01T09:00:00Z"
+    },
+    {
+      "document_id": "hr_personnel_notes",
+      "title": "HR Personnel Notes — Demo Data",
+      "file_name": "hr_personnel_notes.md",
+      "classification": "confidential",
+      "owner_id": "casey_admin",
+      "allowed_roles": ["admin"],
+      "allowed_users": [],
+      "created_at": "2026-09-20T09:00:00Z"
+    }
+  ]
+}

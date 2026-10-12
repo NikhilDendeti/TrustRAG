@@ -1,0 +1,19 @@
+{
+  "users": [
+    {
+      "user_id": "alice_employee",
+      "display_name": "Alice (Employee)",
+      "roles": ["employee"]
+    },
+    {
+      "user_id": "bob_manager",
+      "display_name": "Bob (Manager)",
+      "roles": ["manager", "employee"]
+    },
+    {
+      "user_id": "casey_admin",
+      "display_name": "Casey (Admin)",
+      "roles": ["admin"]
+    }
+  ]
+}
