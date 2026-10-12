@@ -41,9 +41,19 @@ This is a hackathon prototype, not a production security system. See
 
 ```text
 trustrag/
-├── app.py                  # Streamlit UI
+├── app.py                  # Streamlit UI (legacy — see "React UI" below)
+├── server.py                # FastAPI REST API for the React UI — thin wrapper,
+│                             # no business logic of its own
+├── frontend/                 # React + TypeScript + Tailwind (dark theme) UI
+│   └── src/
+│       ├── api.ts             # typed fetch client for server.py
+│       ├── AuthContext.tsx    # session/token state
+│       ├── components/        # Layout (responsive sidebar/drawer), ui primitives
+│       └── pages/              # Assistant, Documents, Delegation, Audit, About, Login
 ├── config.py                # env/config loading
-├── auth/permissions.py      # RBAC + ACL + delegation authorization (core security module)
+├── auth/
+│   ├── login.py              # authentication (who are you) — demo credential check
+│   └── permissions.py        # authorization (what can you see) — core security module
 ├── ingestion/loader.py       # load/validate users, documents, ACL, delegations
 ├── rag/
 │   ├── embeddings.py         # local offline embedding (default) — no API key needed
@@ -83,7 +93,42 @@ authorization, retrieval, prompt scanning, delegation, and audit logging all
 run offline; without a key, the Assistant page shows the raw authorized
 evidence instead of a generated answer.
 
-## Running the app
+## Running the app — React UI (recommended)
+
+The React frontend talks to `server.py`, a FastAPI layer that wraps the same
+`auth/`, `rag/`, `delegation/`, `audit/`, and `security/` modules the
+Streamlit UI uses — no business logic is duplicated between the two.
+
+**Development** (two processes, with hot reload on both sides):
+
+```bash
+# Terminal 1 — API
+uvicorn server:app --reload --port 8000
+
+# Terminal 2 — frontend
+cd frontend
+npm install
+npm run dev
+```
+
+Open `http://localhost:5173`. Vite proxies `/api/*` to `localhost:8000`
+(see `frontend/vite.config.ts`).
+
+**Production / single-process** (what `Procfile`/`railway.json` run):
+
+```bash
+cd frontend && npm install && npm run build && cd ..
+uvicorn server:app --host 0.0.0.0 --port 8000
+```
+
+`server.py` serves the built `frontend/dist/` directly once it exists —
+one process, one port, both the API and the UI.
+
+## Running the app — Streamlit UI (legacy)
+
+The original Streamlit UI (`app.py`) still works and exercises the exact
+same backend modules; it's kept as a lighter-weight alternative to the React
+build.
 
 ```bash
 streamlit run app.py

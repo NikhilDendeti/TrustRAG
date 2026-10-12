@@ -1,0 +1,60 @@
+@import "tailwindcss";
+
+@theme {
+  /* True Netflix palette: near-black bg, signature red, high-contrast text */
+  --color-bg: #141414;
+  --color-surface: #181818;
+  --color-surface-2: #222222;
+  --color-border: #333333;
+  --color-text: #ffffff;
+  --color-text-muted: #b3b3b3;
+  --color-accent: #e50914;
+  --color-accent-hover: #f40612;
+  --color-success: #2ecc71;
+  --color-success-bg: #11301d;
+  --color-warning: #f5a623;
+  --color-warning-bg: #332405;
+  --color-danger: #e50914;
+  --color-danger-bg: #330a0d;
+  --color-info: #54b4ff;
+  --color-info-bg: #0f2638;
+
+  --font-sans: "Helvetica Neue", Helvetica, Arial, ui-sans-serif, system-ui, "Segoe UI", Roboto, sans-serif;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+  font-family: var(--font-sans);
+}
+
+* {
+  scrollbar-color: var(--color-border) transparent;
+}
+
+::selection {
+  background-color: color-mix(in srgb, var(--color-accent) 45%, transparent);
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
