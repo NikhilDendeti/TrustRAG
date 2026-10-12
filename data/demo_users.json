@@ -3,17 +3,20 @@
     {
       "user_id": "alice_employee",
       "display_name": "Alice (Employee)",
-      "roles": ["employee"]
+      "roles": ["employee"],
+      "password_hash": "4e40e8ffe0ee32fa53e139147ed559229a5930f89c2204706fc174beb36210b3"
     },
     {
       "user_id": "bob_manager",
       "display_name": "Bob (Manager)",
-      "roles": ["manager", "employee"]
+      "roles": ["manager", "employee"],
+      "password_hash": "8d059c3640b97180dd2ee453e20d34ab0cb0f2eccbe87d01915a8e578a202b11"
     },
     {
       "user_id": "casey_admin",
       "display_name": "Casey (Admin)",
-      "roles": ["admin"]
+      "roles": ["admin"],
+      "password_hash": "2c2038912a4b2ec387921a47069f25badbfa9b6442876d11a2249fb56b2340e2"
     }
   ]
 }

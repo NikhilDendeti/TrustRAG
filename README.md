@@ -59,7 +59,7 @@ trustrag/
 │   ├── demo_acl.json
 │   ├── demo_users.json
 │   └── delegations.json
-├── tests/                    # pytest suite (40 tests)
+├── tests/                    # pytest suite (46 tests)
 ├── .env.example
 ├── requirements.txt
 ├── Procfile / railway.json / runtime.txt   # Railway deployment
@@ -91,16 +91,23 @@ streamlit run app.py
 
 Open the URL Streamlit prints (default `http://localhost:8501`).
 
-## Demo accounts (demo-only, NOT real authentication)
+## Demo accounts (demo-only login, NOT production authentication)
 
-| user_id | Display name | Roles |
+The app has a real username/password login screen — it checks credentials
+against a small hardcoded demo set (SHA-256 hashed, no salt/key stretching)
+rather than a bare identity dropdown. It's explicitly labeled in the UI as
+demo-only and is not a security boundary.
+
+| Username | Password | Roles |
 |---|---|---|
-| `alice_employee` | Alice (Employee) | employee |
-| `bob_manager` | Bob (Manager) | manager, employee |
-| `casey_admin` | Casey (Admin) | admin |
+| `alice_employee` | `alice123` | employee |
+| `bob_manager` | `bob123` | manager, employee |
+| `casey_admin` | `casey123` | admin |
 
-The sidebar user selector is a controlled stand-in for login during this demo
-— it is explicitly labeled as such in the UI and is not a security boundary.
+The credential hashes live in `data/demo_users.json`; login logic is in
+`auth/login.py` (kept separate from `auth/permissions.py`, which only ever
+handles authorization, never authentication). Every login attempt — success
+or failure — is written to the audit log.
 
 ## Demo documents
 
@@ -141,10 +148,12 @@ All documents and figures are fictional, synthetic test data.
 pytest -q
 ```
 
-40 tests, all passing, and fully offline (no API key required — the
+46 tests, all passing, and fully offline (no API key required — the
 hash-chain, RBAC, delegation, prompt-scanner, and RAG-security tests force an
 unconfigured LLM provider so they never depend on network access). Covers:
 
+- Login: correct/incorrect password, unknown username, empty credentials, and
+  a password being tried against the wrong account.
 - Role-based and direct-user access (allow/deny).
 - Valid, expired, and revoked delegations.
 - A grantor cannot delegate a document they can't access themselves.

@@ -76,6 +76,15 @@ class HashChainAuditLog:
 
     def _read_events(self) -> list[AuditEvent]:
         events: list[AuditEvent] = []
+        if not os.path.isfile(self.path):
+            # Tolerate the log file being removed out from under a running
+            # process (e.g. local demo cleanup) by treating it as a fresh,
+            # empty chain rather than crashing. This log is a local demo
+            # artifact, not a tamper-resistant production audit store (see
+            # the module docstring's honest-limitation note).
+            os.makedirs(os.path.dirname(self.path) or ".", exist_ok=True)
+            open(self.path, "a", encoding="utf-8").close()
+            return events
         with open(self.path, encoding="utf-8") as f:
             for line_no, line in enumerate(f, start=1):
                 line = line.strip()

@@ -5,6 +5,7 @@ import json
 import os
 from dataclasses import dataclass
 
+from auth.login import Credential
 from auth.permissions import Delegation, Document, User, validate_document
 
 
@@ -35,6 +36,19 @@ def load_users(path: str) -> list[User]:
             )
         )
     return users
+
+
+def load_credentials(path: str) -> list[Credential]:
+    with open(path, encoding="utf-8") as f:
+        raw = json.load(f)
+    credentials = []
+    for entry in raw.get("users", []):
+        user_id = entry.get("user_id")
+        password_hash = entry.get("password_hash")
+        if not user_id or not password_hash:
+            continue
+        credentials.append(Credential(user_id=user_id, password_hash=password_hash))
+    return credentials
 
 
 def load_documents(acl_path: str, documents_dir: str) -> LoadedCorpus:

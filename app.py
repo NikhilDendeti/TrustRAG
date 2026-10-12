@@ -1,7 +1,8 @@
 """TrustRAG Streamlit application.
 
-Demo-only authentication: the user selector below is NOT secure login. It is
-a hackathon-demo convenience for switching between synthetic identities. See
+Demo-only authentication: the login screen below checks a username/password
+against a small hardcoded demo credential set (SHA-256 hashed, no salt/key
+stretching). It is a hackathon-demo convenience, not production identity. See
 Page 5 (About) for the full list of limitations.
 """
 from __future__ import annotations
@@ -10,11 +11,19 @@ from datetime import datetime, timedelta, timezone
 
 import streamlit as st
 
+from auth.login import authenticate
 from auth.permissions import Document, User, get_authorized_document_ids, is_authorized
 from audit.hash_chain import HashChainAuditLog
 from config import load_settings
 from delegation.service import DelegationError, create_delegation, delegation_status, revoke_delegation
-from ingestion.loader import load_delegations, load_document_text, load_documents, load_users, save_delegations
+from ingestion.loader import (
+    load_credentials,
+    load_delegations,
+    load_document_text,
+    load_documents,
+    load_users,
+    save_delegations,
+)
 from rag.answerer import answer_question
 from rag.indexer import ChromaIndex
 from rag.retriever import retrieve_authorized_chunks
@@ -48,9 +57,61 @@ def get_delegations() -> list[Document]:
     return load_delegations(SETTINGS.delegations_path)
 
 
-index, corpus = get_index_and_corpus()
 audit_log = get_audit_log()
 users = get_users()
+user_by_id = {u.user_id: u for u in users}
+
+st.sidebar.title("TrustRAG")
+st.sidebar.caption("Secure Enterprise AI — hackathon prototype")
+
+# ---------------------------------------------------------------------------
+# Login gate — demo-only authentication (see module docstring / About page)
+# ---------------------------------------------------------------------------
+if "auth_user_id" not in st.session_state:
+    st.header("Sign in to TrustRAG")
+    st.info(
+        "**Demo authentication, not production login.** This checks a "
+        "username/password against a small hardcoded demo credential set "
+        "(SHA-256 hashed, no salt). It exists to give the demo a real login "
+        "flow instead of a bare identity dropdown — it is not a security "
+        "boundary. See *About and Limitations* after signing in."
+    )
+
+    with st.expander("Demo credentials (for this hackathon demo only)"):
+        st.markdown(
+            "| Username | Password | Role |\n"
+            "|---|---|---|\n"
+            "| `alice_employee` | `alice123` | employee |\n"
+            "| `bob_manager` | `bob123` | manager, employee |\n"
+            "| `casey_admin` | `casey123` | admin |"
+        )
+
+    with st.form("login_form"):
+        username = st.text_input("Username")
+        password = st.text_input("Password", type="password")
+        submitted = st.form_submit_button("Log in", type="primary")
+
+        if submitted:
+            credentials = load_credentials(SETTINGS.demo_users_path)
+            user_id = authenticate(username.strip(), password, credentials)
+            if user_id is None:
+                audit_log.append("login_failed", username.strip() or "<empty>", {"outcome": "denied"})
+                st.error("Invalid username or password.")
+            else:
+                audit_log.append("login", user_id, {"outcome": "success"})
+                st.session_state.auth_user_id = user_id
+                st.rerun()
+
+    st.stop()
+
+current_user = user_by_id.get(st.session_state.auth_user_id)
+if current_user is None:
+    # Credential set changed since login (or stale session); fail closed by
+    # forcing re-authentication rather than falling back to any default user.
+    del st.session_state["auth_user_id"]
+    st.rerun()
+
+index, corpus = get_index_and_corpus()
 
 if corpus.rejected:
     st.sidebar.warning(
@@ -58,19 +119,12 @@ if corpus.rejected:
         f"missing/invalid metadata and are not queryable: {', '.join(corpus.rejected)}"
     )
 
-st.sidebar.title("TrustRAG")
-st.sidebar.caption("Secure Enterprise AI — hackathon prototype")
-st.sidebar.info(
-    "Demo authentication: selecting a user below is NOT real login. It is a "
-    "controlled stand-in for identity during this demo."
-)
-
-user_by_id = {u.user_id: u for u in users}
-selected_user_id = st.sidebar.selectbox(
-    "Demo user", options=list(user_by_id.keys()), format_func=lambda uid: user_by_id[uid].display_name
-)
-current_user = user_by_id[selected_user_id]
+st.sidebar.success(f"Signed in as **{current_user.display_name}**")
 st.sidebar.markdown(f"**Role(s):** {', '.join(current_user.roles)}")
+if st.sidebar.button("Log out"):
+    audit_log.append("logout", current_user.user_id, {})
+    del st.session_state["auth_user_id"]
+    st.rerun()
 
 if "delegations" not in st.session_state:
     st.session_state.delegations = get_delegations()
